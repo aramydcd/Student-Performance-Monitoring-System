@@ -163,39 +163,39 @@ def sidebar():
         st.sidebar.markdown("---")
         if st.sidebar.button("🚪 Logout"):
             logout()
-        # Role-based menu example
-        # if user['role'].title() == "Student":
-        #     st.sidebar.button("View Courses")
-        #     st.sidebar.button("View Attendance")
-        # elif user['role'].title() == "Lecturer":
-        #     st.sidebar.button("Mark Attendance")
-        #     st.sidebar.button("Enter Scores")
-        # elif user['role'].title() == "Admin":
-        #     st.sidebar.button("Manage Users")
-        #     st.sidebar.button("Manage Courses")
-        # user = st.session_state["user"]
-        # st.write(f"### 👋 Welcome {user['full_name']}!")
 
-        # if user["role"] == "student":
-        #     st.info("📚 Student Dashboard coming soon...")
-        # elif user["role"] == "lecturer":
-        #     st.info("🧑‍🏫 Lecturer Dashboard coming soon...")
-        # elif user["role"] == "admin":
-        #     st.info("🛠️ Admin Dashboard coming soon...")
     else:
         st.sidebar.info("Not logged in.")
 
 # ----------------- MAIN -----------------
 def main():
-    st.title("🔐 Authentication")
+    st.sidebar.title("📌 Navigation")
     sidebar()
-    tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
-    with tabs[0]:
-        sign_in()
-    with tabs[1]:
-        sign_up()
-    with tabs[2]:
-        reset_password()
+
+    if "user" in st.session_state:  # ✅ Already logged in
+        user = st.session_state["user"]
+        st.title("🎯 Dashboard")
+
+        if user["role"] == "student":
+            st.success("📚 Welcome to the Student Dashboard!")
+            # TODO: add student features
+        elif user["role"] == "lecturer":
+            st.success("🧑‍🏫 Welcome to the Lecturer Dashboard!")
+            # TODO: add lecturer features
+        elif user["role"] == "admin":
+            st.success("🛠️ Welcome to the Admin Dashboard!")
+            # TODO: add admin features
+
+    else:  # ❌ Not logged in
+        st.title("🔐 Authentication")
+        tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
+        with tabs[0]:
+            sign_in()
+        with tabs[1]:
+            sign_up()
+        with tabs[2]:
+            reset_password()
+
 
 if __name__ == "__main__":
     main()
