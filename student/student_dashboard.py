@@ -1,6 +1,6 @@
 import streamlit as st, pandas as pd
 from utils.rbac import allow_roles
-from utils.models import get_scores, student_enrollments ,attendance_summary
+from utils.models import get_scores, student_enrollments ,attendance_summary,get_recent_notifications
 from utils.gpa import current_gpa, projected_gpa
 import myCourses,Attendance
 from student import gpa
@@ -9,12 +9,17 @@ from student import gpa
 
 @allow_roles("student")
 def main():
+    st.set_page_config(page_title="EduShield | 🧑‍🏫 Dashboard", page_icon="images/Edushield_Icon1.png", layout="wide")
+    
     st.title("📊 Student Dashboard")
     u = st.session_state["user"]
 
     st.success(f"👋 Welcome, {u['full_name']}!")
+    st.caption("🎓 “Stay on track, stay ahead — your academic journey starts here.”")
 
     # Session/Semester Selection
+    st.markdown("--------------------")
+    st.subheader("🔍 Session/Semester Filter")
     col1, col2 = st.columns(2)
     with col1:
         session = st.selectbox("📅 Session", ["2024/2025"])
@@ -71,19 +76,21 @@ def main():
     # --------------------------
     # Notifications Preview
     # --------------------------
+
     st.markdown("--------------------")
     st.subheader("🔔 Notifications")
-    # Stub for now - replace with DB call later
-    notifications = [
-        {"title": "New assignment posted in CSC201", "date": "2025-08-30"},
-        {"title": "Mid-semester exam starts next week", "date": "2025-09-05"},
-    ]
+
+    notifications = get_recent_notifications(u["id"], limit=3)
+
     if notifications:
-        for note in notifications[:3]:  # Show only latest 3
-            st.markdown(f"- **{note['title']}**  _(📅 {note['date']})_")
+        for note in notifications:
+            st.markdown(
+                f"- **{note['title']}**  \n"
+                f"  {note['message']}  _(📅 {note['created_at']})_"
+            )
     else:
         st.info("No new notifications.")
-    
+
     st.markdown("--------------------")
 
     # --------------------------
@@ -100,6 +107,8 @@ def main():
     with col3:
         if st.button("🎓 GPA Details"):
             gpa.main()
+    
+    st.markdown("---------------")
 
 
 if __name__ == "__main__":
