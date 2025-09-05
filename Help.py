@@ -5,6 +5,7 @@ from utils.rbac import allow_roles
 
 @allow_roles("student","lecturer","admin")
 def help_support_page():
+    st.set_page_config(page_title="EduShield | 🆘 Help & Support", page_icon="images/Edushield_Icon1.png", layout="wide")
     u = st.session_state["user"]
 
     st.title("🆘 Help & Support")
@@ -93,5 +94,4 @@ def help_support_page():
     st.caption("© 2025 EduShield | Help & Support Team")
 
 
-st.set_page_config(page_title="EduShield | 🆘 Help & Support", page_icon="images/Edushield_Icon1.png", layout="wide")
 help_support_page()
