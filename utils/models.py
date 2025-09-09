@@ -290,9 +290,6 @@ def set_user_active(user_id: int, active: int):
         conn.commit()
 
 
-
-
-
 def list_resources_for_course(course_code: str):
     """
     Returns all resources uploaded for a course.
@@ -347,7 +344,7 @@ def add_course(code: str, title: str, units: int, level: str, semester = "First"
     with get_conn() as conn:
         conn.execute("""
             INSERT OR IGNORE INTO courses (code, title, units, level,semester, session)
-            VALUES (?, ?, ?, ?)
+            VALUES (?, ?, ?, ?, ?, ?)
         """, (code, title, units, level,semester, session))
         conn.commit()
 
@@ -461,6 +458,16 @@ def list_all_users():
     return [dict(zip(cols, r)) for r in rows]
 
 
+def get_user_matric_by_email(email:str):
+    with get_conn() as conn:
+        row = conn.execute("""
+        SELECT u.matric_no
+        FROM users u
+        WHERE u.email=? 
+        """,(email,)).fetchone()
+
+        return row[0] if row else None
+    
 
 def list_courses_for_lecturer(lecturer_id: int, session: str = None, semester: str = None):
     """
@@ -649,6 +656,10 @@ def delete_course(course_id: int):
         conn.execute("DELETE FROM enrollments WHERE course_id=?", (course_id,))
         conn.execute("DELETE FROM lecturer_courses WHERE course_id=?", (course_id,))
         conn.execute("DELETE FROM resources WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM scores WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM attendance WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM messages WHERE course_id=?", (course_id,))
+        conn.execute("DELETE FROM notifications WHERE course_id=?", (course_id,))
         conn.execute("DELETE FROM courses WHERE id=?", (course_id,))
         conn.commit()
 

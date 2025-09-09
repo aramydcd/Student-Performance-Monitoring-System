@@ -258,7 +258,7 @@ def admin_course_management(session,semester):
     with tab2:
         st.subheader("➕ Add a New Course")
 
-        code = st.text_input("Course Code (e.g. CSC101)")
+        code = st.text_input("Course Code (e.g. COM101)")
         title = st.text_input("Course Title")
         units = st.number_input("Units", min_value=1, max_value=6, step=1)
         level = st.selectbox("Level", ["ND1", "ND2", "HND1", "HND2"])

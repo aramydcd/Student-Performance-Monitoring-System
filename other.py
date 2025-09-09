@@ -1,27 +1,43 @@
-# import sqlite3
-from utils.db import get_conn
+import sqlite3
+
+DB_PATH = "secure.db"
+
+# def migrate_courses_fk():
+#     with sqlite3.connect(DB_PATH) as conn:
+#         conn.executescript("""
+#             PRAGMA foreign_keys = off;
+
+#             -- Recreate courses with new schema
+#             CREATE TABLE courses (
+#                 id INTEGER PRIMARY KEY AUTOINCREMENT,
+#                 code TEXT UNIQUE NOT NULL,
+#                 title TEXT NOT NULL,
+#                 units INTEGER NOT NULL,
+#                 level TEXT NOT NULL,
+#                 is_active INTEGER DEFAULT 1,
+#                 session TEXT NOT NULL,
+#                 semester TEXT NOT NULL
+#             );
 
 
-# conn = sqlite3.connect("secure.db")
-# c = conn.cursor()
+#             DROP TABLE courses_old;
 
-# c.execute("ALTER TABLE users ADD COLUMN profile_pic TEXT;")
+#             PRAGMA foreign_keys = on;
+#         """)
+#     print("✅ Migration complete: `courses` now includes session + semester.")
 
-def create_support_table():
-    with get_conn() as conn:
-        conn.execute("""
-        CREATE TABLE IF NOT EXISTS support_tickets (
-            id INTEGER PRIMARY KEY AUTOINCREMENT,
-            name TEXT NOT NULL,
-            email TEXT NOT NULL,
-            message TEXT NOT NULL,
-            status TEXT DEFAULT 'Pending',
-            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
-        )
-        """)
 
-# conn.commit()
-# conn.close()
 
-create_support_table()
+def check_migaration():
+    with sqlite3.connect(DB_PATH) as c:
+        print("Foreign keys on courses:")
+        cur = c.execute("PRAGMA foreign_key_list(courses);")
+        print(cur.fetchall())
 
+        print("Foreign key violations:")
+        cur = c.execute("PRAGMA foreign_key_check;")
+        print(cur.fetchall())  
+
+if __name__ == "__main__":
+    # migrate_courses_fk()
+    check_migaration()

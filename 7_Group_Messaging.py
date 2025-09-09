@@ -30,7 +30,8 @@ def main():
 
     # --- input with a rotating key so it resets AFTER we send
     input_key = f"msg_text_{st.session_state.msg_nonce}"
-    msg_text = st.text_input("✍️ Type your message:", key=input_key)
+    msg_text = st.text_area("✍️ Type your message:",height=140, key=input_key)
+
 
     # --- send message
     confirm= False

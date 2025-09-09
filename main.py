@@ -44,7 +44,7 @@ def sign_up():
     full_name = st.text_input("👤 Full Name", key="signup_full_name")
     col1, col2 = st.columns(2)
     email = col1.text_input("📧 Email", key="signup_email")
-    role_display = col2.selectbox("🛠️ Role", ["Student", "Lecturer", "Admin"], key="signup_role")
+    role_display = col2.selectbox("🛠️ Role", ["Student", "Lecturer"], key="signup_role")
 
     role = role_display.lower()  # normalize for DB
 
@@ -231,7 +231,7 @@ def menu():
     # ----------------- Navigation -----------------
     st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="centered")
     # st.image("images/Edushield_Logo7.png", width=180)
-    # st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
+    st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
     
     
    
