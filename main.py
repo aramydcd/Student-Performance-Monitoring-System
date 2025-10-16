@@ -231,7 +231,7 @@ def menu():
     # ----------------- Navigation -----------------
     st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="centered")
     # st.image("images/Edushield_Logo7.png", width=180)
-    st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
+    #st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
     
     
    
