@@ -36,7 +36,7 @@ def sign_in():
         if bcrypt.checkpw(password.encode(), hashed_password):
             set_user_session(user)
             update_is_active(user[0], 1)
-            st.success(f"Welcome back, {user[2]}!")
+            # st.success(f"Welcome back, {user[2]}!")
             st.rerun()
         else:
             st.error("Incorrect password.")
@@ -89,7 +89,7 @@ def sign_up():
         user_row = get_user_by_email(email)
         set_user_session(user_row)
         update_is_active(user_id, 1)
-        st.success("Registration successful!")
+        # st.success("Registration successful!")
         st.rerun()
 
 
@@ -298,7 +298,7 @@ def menu():
     # ----------------- Navigation -----------------
     st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="wide")
     # st.image("images/Edushield_Logo7.png", width=180)
-    #st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
+    st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
     
     
    
