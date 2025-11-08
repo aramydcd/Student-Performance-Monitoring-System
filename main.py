@@ -1,5 +1,6 @@
 import streamlit as st
-import sqlite3, bcrypt, re
+import time
+import bcrypt, re
 from utils.models import create_user,get_user_by_email,update_is_active,get_user_by_matric
 from utils.db import get_conn
 
@@ -39,6 +40,7 @@ def sign_in():
             st.rerun()
         else:
             st.error("Incorrect password.")
+
 def sign_up():
     st.subheader("Create a New Account")
     full_name = st.text_input("👤 Full Name", key="signup_full_name")
@@ -127,14 +129,79 @@ def logout():
 
 def auth():
     if "user" not in st.session_state: # ❌ Not logged in
-        st.title("🔐 Authentication")
-        tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
-        with tabs[0]:
-            sign_in()
-        with tabs[1]:
-            sign_up()
-        with tabs[2]:
-            reset_password()
+        # st.title("🔐 Authentication")
+        widt = [0.5, 0.5]
+        col1, col2 = st.columns(widt,gap="large",border=True)
+        with col1:
+            st.image("images/Edushield_Logo7.png", caption='"🔒 Securing your Academic Record"', width=250)
+            st.markdown("----")
+            tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
+            with tabs[0]:
+                sign_in()
+            with tabs[1]:
+                sign_up()
+            with tabs[2]:
+                reset_password()
+        with col2:
+            # Header Section
+            st.markdown("""
+            <div style="text-align:center; padding: 20px;">
+                <h2>🔒 A Secure Academic Performance Monitoring System</h2>
+                <hr>
+                <p style="font-size:16px; color:gray;">
+                   <b> A final year project designed and implemented by</b>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+            col3, col4, col5 = st.columns(3, border=True)
+            
+            with col3:
+                st.image("static/az8.jpg")
+                st.markdown("""
+                <div style="text-align:center; padding: 5px;">
+                    <p style="font-size:15px; color:gray;">  
+                        <b>ABDULAKEEM ABDULAZEEZ ARAMIDE</b>
+                    </p>
+                    <p style="font-size:15px; color:gray;">  
+                        <b>(23/105/01/F/0002)</b>
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            with col4:
+                st.image("static/ben1.jpg")
+                st.markdown("""
+                <div style="text-align:center; padding: 5px;">
+                    <p style="font-size:15px; color:gray;">  
+                        <b>JOSEPH BENJAMIN OLUWATEMITOPE</b>
+                    </p>
+                    <p style="font-size:15px; color:gray;">  
+                        <b>(23/105/01/F/0143)</b>
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+            with col5:
+                st.image("static/default_dp.jpg")
+                st.markdown("""
+                <div style="text-align:center; padding: 5px;">
+                    <p style="font-size:15px; color:gray;">  
+                        <b>FADEMINE OLAKUNLE SAMUEL</b>
+                    </p>
+                    <p style="font-size:15px; color:gray;">  
+                        <b>(23/105/01/F/0145)</b>
+                    </p>
+                </div>
+                """, unsafe_allow_html=True)
+         
+            st.markdown("""
+            <div style="text-align:center; padding: 20px;">
+                <p style="font-size:16px; color:gray;">  
+                    <b> Department of Computer Science,</b>
+                </p>
+                <p style="font-size:16px; color:gray;">  
+                    <b> Moshood Abiola Polytechnic, Abeokuta Ogun State.</b>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
 
 
 # ----------------- SIDEBAR -----------------
@@ -229,7 +296,7 @@ def menu():
         admin_pages = [admin_dash,user_management_page,courseAllocation_page,report_page,systemLogs_page,notification_page]
 
     # ----------------- Navigation -----------------
-    st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="centered")
+    st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="wide")
     # st.image("images/Edushield_Logo7.png", width=180)
     #st.logo(image="images/Edushield_Logo7.png", icon_image="images/Edushield_Logo7.png")
     
