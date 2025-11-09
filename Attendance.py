@@ -54,15 +54,16 @@ def main():
                 for s in students:
                     user_id = get_user_id_by_email(s["email"])
                     present = st.checkbox(s["full_name"], value=True, key=f"att_{user_id}")
-                    if st.button(f"Save Attendance", key=f"save_{user_id}"):
-                        mark_attendance(chosen["course_id"], user_id, class_date, present, u["id"])
-                        add_notification(
-                            title=f"Attendance marked for {chosen["code"]}",
-                            message=f"Attendance for {class_date} has been recorded.",
-                            course_id=chosen["course_id"]
-                        )
+                if st.button(f"Save Attendance", key=f"save_{user_id}"):
+                    mark_attendance(chosen["course_id"], user_id, class_date, present, u["id"])
+                    add_notification(
+                        title=f"Attendance marked for {chosen["code"]}",
+                        message=f"Attendance for {class_date} has been recorded.",
+                        course_id=chosen["course_id"]
+                    )
 
-                        st.success("✅ Saved.")
+                    st.success("✅ Saved.")
+                    st.rerun()
             else:
                 st.info(f"No student have enrolled for {chosen['code']}")
         st.divider()

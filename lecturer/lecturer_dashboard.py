@@ -59,6 +59,7 @@ def main():
         if st.button("➕ Add to my courses"):
             lecturer_pick_course(u["id"], course_map[course_label], session, semester)
             st.success("✅ Course added.")
+            st.rerun()
     else:
         st.info("🎉 You’ve already registered all available courses for this semester.")
 

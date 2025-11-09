@@ -93,7 +93,7 @@ def main():
             st.info("You are not enrolled in any courses this semester.")
     
     elif u["role"]=="lecturer":
-        lecturer_course_page(u, session, semester)
+        lecturer_course_page(u, session = "2024/2025", semester = "First")
     
     else:
         st.write("Admins can register students by impersonation (future enhancement).")
@@ -132,8 +132,10 @@ def lecturer_course_page(u: dict, session , semester):
         if st.button("➕ Add to my courses"):
             lecturer_pick_course(u["id"], course_map[course_label], session, semester)
             st.success("✅ Course added.")
+            st.rerun()
     else:
         st.info("🎉 You’ve already registered all available courses for this semester.")
+    
 
     st.divider()
     # -------------------------------

@@ -365,6 +365,7 @@ def save_resource(course_id: int, user_id: int,title, description: str, file):
         conn.commit()
 
 
+
 def delete_resource(resource_id: int):
     """Delete resource from DB and file system."""
     with get_conn() as conn:

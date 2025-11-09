@@ -1,18 +1,17 @@
 import streamlit as st
 
 
-
 def about_page():
     # Title + Hero Section
-    st.set_page_config(page_title="EduShield | ℹ️ About US", page_icon="images/Edushield_Icon1.png", layout="wide")
+    st.set_page_config(page_title="EduShield | ℹ️ About Us", page_icon="images/Edushield_Icon1.png", layout="wide")
     
-    st.title("ℹ️ About US")
+    st.title("ℹ️ About Us")
     st.caption("'Everything you need to know about EduShield'")
     st.divider()
 
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("images/EduShield_Logo7.png", caption="EduShield", width=180)  # You can replace with your logo
+        st.image("images/EduShield_Logo7.png", caption="EduShield", width=180)
     with col2:
         st.markdown(
             """
@@ -103,10 +102,72 @@ def about_page():
         st.markdown("📍 **Headquarters**: Lagos, Nigeria")
         st.markdown("☎️ **Phone**: +234 800 123 4567")
 
-    # Footer
+    # Divider
+    st.markdown("---")
+
+    # 🌟 Final Year Project Info
+    st.markdown(
+        """
+        <div style="text-align:center; background-color:#f0f2f6; padding:15px; border-radius:10px; margin-top:30px;">
+            <h4>🎓 Final Year Project</h4>
+            <p style="margin:5px 0;">Designed and Developed by</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
+    col3, col4, col5 = st.columns(3, border=True)
+            
+    with col3:
+        st.image("static/az8.jpg")
+        st.markdown("""
+        <div style="text-align:center; padding: 5px;">
+            <p style="font-size:15px; color:gray;">  
+                <b>ABDULAKEEM ABDULAZEEZ ARAMIDE</b>
+            </p>
+            <p style="font-size:15px; color:gray;">  
+                <b>(23/105/01/F/0002)</b>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col4:
+        st.image("static/ben1.jpg")
+        st.markdown("""
+        <div style="text-align:center; padding: 5px;">
+            <p style="font-size:15px; color:gray;">  
+                <b>JOSEPH BENJAMIN OLUWATEMITOPE</b>
+            </p>
+            <p style="font-size:15px; color:gray;">  
+                <b>(23/105/01/F/0143)</b>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+    with col5:
+        st.image("static/upward1.jpg")
+        st.markdown("""
+        <div style="text-align:center; padding: 5px;">
+            <p style="font-size:15px; color:gray;">  
+                <b>FADEMINE OLAKUNLE SAMUEL</b>
+            </p>
+            <p style="font-size:15px; color:gray;">  
+                <b>(23/105/01/F/0145)</b>
+            </p>
+        </div>
+        """, unsafe_allow_html=True)
+
+    st.markdown(
+        """
+        <div style="text-align:center; background-color:#f0f2f6; padding:15px; border-radius:10px; margin-top:30px;">
+            <p style="margin:5px 0;">Department of Computer Science,</p>
+            <p style="margin:5px 0;">Moshood Abiola Polytechnic, Abeokuta, Ogun State, Nigeria.</b></p>
+            <p style="color:gray; font-size:12px; margin-top:10px;">Session 2024/2025</p>
+        </div>
+        """,
+        unsafe_allow_html=True
+    )
+
     st.markdown("---")
     st.caption("© 2025 EduShield | All Rights Reserved | Privacy Policy | Terms of Service")
-
 
 
 about_page()

@@ -9,20 +9,22 @@ c.executescript("""
 PRAGMA foreign_keys = ON;
 
 CREATE TABLE IF NOT EXISTS users (
-  id INTEGER PRIMARY KEY AUTOINCREMENT,
-  email TEXT UNIQUE NOT NULL,
-  full_name TEXT NOT NULL,
-  matric_no TEXT UNIQUE,  
-  role TEXT CHECK(role IN ('admin','lecturer','student')) NOT NULL,
-  password_hash BLOB NOT NULL,
-  level TEXT,
-  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
-  is_active INTEGER DEFAULT 0,
-  CONSTRAINT student_matric CHECK (
-      (role = 'student' AND matric_no IS NOT NULL AND level IS NOT NULL) OR 
-      (role IN ('lecturer','admin') AND matric_no IS NULL AND level IS NULL)
-  )
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    email TEXT UNIQUE NOT NULL,
+    full_name TEXT NOT NULL,
+    matric_no TEXT UNIQUE,
+    role TEXT CHECK(role IN ('admin','lecturer','student')) NOT NULL,
+    password_hash BLOB NOT NULL,
+    level TEXT,
+    profile_pic TEXT,  -- 🆕 added column
+    created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+    is_active INTEGER DEFAULT 0,
+    CONSTRAINT student_matric CHECK (
+        (role = 'student' AND matric_no IS NOT NULL AND level IS NOT NULL) OR 
+        (role IN ('lecturer','admin') AND matric_no IS NULL AND level IS NULL)
+    )
 );
+
 
 CREATE TABLE IF NOT EXISTS courses (
   id INTEGER PRIMARY KEY AUTOINCREMENT,
@@ -30,6 +32,8 @@ CREATE TABLE IF NOT EXISTS courses (
   title TEXT NOT NULL,
   units INTEGER NOT NULL,
   level TEXT NOT NULL,
+  session TEXT DEFAULT '2024/2025',
+  semester TEXT NOT NULL DEFAULT 'First',
   is_active INTEGER DEFAULT 1
 );
 
@@ -82,13 +86,27 @@ CREATE TABLE IF NOT EXISTS scores (
   FOREIGN KEY(entered_by) REFERENCES users(id) ON DELETE SET NULL
 );
                 
+CREATE TABLE IF NOT EXISTS student_gpa (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    student_id INTEGER NOT NULL,
+    session TEXT NOT NULL,
+    semester TEXT NOT NULL,
+    gpa REAL NOT NULL DEFAULT 0.0,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY(student_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE(student_id, session, semester)
+);
+                
 CREATE TABLE IF NOT EXISTS resources (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
-    course_id INTEGER NOT NULL,
-    description TEXT,
-    file_path TEXT NOT NULL,
+    title TEXT NOT NULL,              -- resource title (e.g., "Lecture Notes Week 1")
+    description TEXT,                 -- optional extra info
+    file_path TEXT NOT NULL,          -- file location on disk or URL
+    course_id INTEGER NOT NULL,       -- link to course
+    lecturer_id INTEGER NOT NULL,     -- who uploaded it
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
-    FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE
+    FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE,
+    FOREIGN KEY(lecturer_id) REFERENCES users(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS messages (
@@ -100,6 +118,18 @@ CREATE TABLE IF NOT EXISTS messages (
   FOREIGN KEY(sender_id) REFERENCES users(id) ON DELETE CASCADE,
   FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE
 );
+
+CREATE TABLE IF NOT EXISTS notifications (
+  id INTEGER PRIMARY KEY AUTOINCREMENT,
+  title TEXT NOT NULL,
+  message TEXT NOT NULL,
+  user_id INTEGER,
+  course_id INTEGER,
+  created_at TEXT DEFAULT CURRENT_TIMESTAMP,
+  FOREIGN KEY(user_id) REFERENCES users(id) ON DELETE CASCADE,
+  FOREIGN KEY(course_id) REFERENCES courses(id) ON DELETE CASCADE
+);
+
 """)
 
 def mkuser(email, name, role, pwd, level=None, matric_no=None):
@@ -116,16 +146,69 @@ def mkuser(email, name, role, pwd, level=None, matric_no=None):
         )
 
 # seed users
-mkuser("admin@example.com","System Admin","admin","Admin@123")
-mkuser("lect1@example.com","Dr. Ada Lecturer","lecturer","Lecturer@123")
-mkuser("stud1@example.com","Kemi Student","student","Student@123","ND1","23/105/001")
-mkuser("stud2@example.com","Chidi Student","student","Student@123","ND2","28/01/001")
+mkuser(email="admin@example.com",
+       name="System Admin",
+       role="admin",
+       pwd="123456"
+       )
+
+mkuser(email="lect1@example.com",
+       name="Dr. Ada Lecturer",
+       role="lecturer",
+       pwd="123456"
+       )
+
+mkuser(email="stud1@example.com",
+       name="Kemi Masho",
+       role="student",
+       pwd="123456",
+       level="ND1",
+       matric_no="23/105//01/F/0001"
+       )
+
+mkuser(email="stud2@example.com",
+       name="Chidi Nkwa",
+       role="student",
+       pwd="123456",
+       level="ND1",
+       matric_no="23/021/01/P/0001"
+       )
+
+mkuser(email="stud3@example.com",
+       name="Kolawole Uzzy",
+       role="student",
+       pwd="123456",
+       level="ND1",
+       matric_no="23/021/01/F/0021"
+       )
+
+mkuser(email="stud4@example.com",
+       name="Chidinma Kolu Nkwa",
+       role="student",
+       pwd="123456",
+       level="ND1",
+       matric_no="23/021/01/P/0101"
+       )
+
+mkuser(email="stud5@example.com",
+       name="Abdulahi Quadri",
+       role="student",
+       pwd="123456",
+       level="ND1",
+       matric_no="23/021/01/F/0025"
+       )
 
 # seed courses
 courses = [
-    ("CSC101","Introduction to Computing",3,"ND1"),
-    ("MTH111","Calculus I",3,"ND1"),
-    ("CSC201","Data Structures",3,"ND2"),
+    ("COM 111","INTRODUCTION To COMPUTING",3,"ND1"),
+    ("COM 112","INTRODUCTION TO DIGITAL ELERCTRONUCS",3,"ND1"),
+    ("COM 113","INTRODUCTION PROGRAMMING LANGUAGE",3,"ND1"),
+    ("COM 114","STATISTICS IN COMPUTING I",3,"ND1"),
+    ("COM 115","APPLICATION PACKAGES I",3,"ND1"),
+    ("MTH111","LOGIC REASONING",2,"ND1"),
+    ("GNS 101","CITIZENSHIP EDUCATION I",2,"ND1"),
+    ("GNS 111","COMMUNICATION IN ENGLISH I",2,"ND1"),
+
 ]
 for code,title,units,level in courses:
     c.execute("INSERT OR IGNORE INTO courses (code,title,units,level) VALUES (?,?,?,?)",

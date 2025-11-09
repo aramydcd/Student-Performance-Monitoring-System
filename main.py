@@ -180,7 +180,7 @@ def auth():
                 </div>
                 """, unsafe_allow_html=True)
             with col5:
-                st.image("static/default_dp.jpg")
+                st.image("static/upward1.jpg")
                 st.markdown("""
                 <div style="text-align:center; padding: 5px;">
                     <p style="font-size:15px; color:gray;">  
@@ -198,7 +198,8 @@ def auth():
                     <b> Department of Computer Science,</b>
                 </p>
                 <p style="font-size:16px; color:gray;">  
-                    <b> Moshood Abiola Polytechnic, Abeokuta Ogun State.</b>
+                    <b> Moshood Abiola Polytechnic, Abeokuta, Ogun State, Nigeria.</b>
+                    <p style="color:gray; font-size:12px; margin-top:10px;">Session 2024/2025</p>
                 </p>
             </div>
             """, unsafe_allow_html=True)
