@@ -167,30 +167,7 @@ def auth():
                     </p>
                 </div>
                 """, unsafe_allow_html=True)
-            # with col4:
-            #     st.image("static/ben1.jpg")
-            #     st.markdown("""
-            #     <div style="text-align:center; padding: 5px;">
-            #         <p style="font-size:15px; color:gray;">  
-            #             <b>JOSEPH BENJAMIN OLUWATEMITOPE</b>
-            #         </p>
-            #         <p style="font-size:15px; color:gray;">  
-            #             <b>(23/105/01/F/0143)</b>
-            #         </p>
-            #     </div>
-            #     """, unsafe_allow_html=True)
-            # with col5:
-            #     st.image("static/upward1.jpg")
-            #     st.markdown("""
-            #     <div style="text-align:center; padding: 5px;">
-            #         <p style="font-size:15px; color:gray;">  
-            #             <b>FADEMINE OLAKUNLE SAMUEL</b>
-            #         </p>
-            #         <p style="font-size:15px; color:gray;">  
-            #             <b>(23/105/01/F/0145)</b>
-            #         </p>
-            #     </div>
-            #     """, unsafe_allow_html=True)
+           
          
             st.markdown("""
             <div style="text-align:center; padding: 20px;">
@@ -299,7 +276,7 @@ def menu():
     # ----------------- Navigation -----------------
     st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="wide")
     # st.image("images/Edushield_Logo7.png", width=180)
-    st.logo("static/Edushield_Logo7.png", icon_image="static/Edushield_Logo7.png")
+    # st.logo("static/Edushield_Logo7.png", icon_image="static/Edushield_Logo7.png")
     
     
    
