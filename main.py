@@ -133,7 +133,7 @@ def auth():
         widt = [0.5, 0.5]
         col1, col2 = st.columns(widt,gap="large",border=True)
         with col1:
-            st.image("static/Edushield_Logo7.png", caption='"🔒 Securing your Academic Record"', width=250)
+            st.image("static/logo.png", caption='"🔒 Securing your Academic Record"', width=250)
             st.markdown("----")
             tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
             with tabs[0]:
@@ -275,8 +275,8 @@ def menu():
 
     # ----------------- Navigation -----------------
     st.set_page_config(page_title="EduShield | 🔐 Authentication", page_icon="images/Edushield_Icon1.png", layout="wide")
-    # st.image("images/Edushield_Logo7.png", width=180)
-    # st.logo("static/Edushield_Logo7.png", icon_image="static/Edushield_Logo7.png")
+    # st.image("images/logo.png", width=180)
+    # st.logo("static/logo.png", icon_image="static/logo.png")
     
     
    

@@ -11,7 +11,7 @@ def about_page():
 
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("images/EduShield_Logo7.png", caption="EduShield", width=180)
+        st.image("images/logo.png", caption="EduShield", width=180)
     with col2:
         st.markdown(
             """
