@@ -153,7 +153,7 @@ def auth():
                 </p>
             </div>
             """, unsafe_allow_html=True)
-            col3, col4, col5 = st.columns(3, border=True)
+            col3 = st.columns(1, border=True)
             
             with col3:
                 st.image("static/az8.jpg")
