@@ -133,7 +133,7 @@ def auth():
         widt = [0.5, 0.5]
         col1, col2 = st.columns(widt,gap="large",border=True)
         with col1:
-            st.image("images/Edushield_Logo7.png", caption='"🔒 Securing your Academic Record"', width=250)
+           # st.image("images/Edushield_Logo7.png", caption='"🔒 Securing your Academic Record"', width=250)
             st.markdown("----")
             tabs = st.tabs(["Sign In", "Sign Up", "Reset Password"])
             with tabs[0]:
