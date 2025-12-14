@@ -153,10 +153,10 @@ def auth():
                 </p>
             </div>
             """, unsafe_allow_html=True)
+            col3, col4, col5 = st.columns(3)
             
-            # col3 = st.columns(border=True)
-            
-            with st.columns(border=True):
+            col3.border = True
+            with col3:
                 st.image("static/az8.jpg")
                 st.markdown("""
                 <div style="text-align:center; padding: 5px;">
