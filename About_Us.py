@@ -11,7 +11,7 @@ def about_page():
 
     col1, col2 = st.columns([1, 2])
     with col1:
-        st.image("images/logo.png", caption="EduShield", width=180)
+        st.image("static/logo.png", caption="EduShield", width=180)
     with col2:
         st.markdown(
             """
@@ -111,53 +111,9 @@ def about_page():
         <div style="text-align:center; background-color:#f0f2f6; padding:15px; border-radius:10px; margin-top:30px;">
             <h4>🎓 Final Year Project</h4>
             <p style="margin:5px 0;">Designed and Developed by</p>
-        </div>
-        """,
-        unsafe_allow_html=True
-    )
-
-    col3, col4, col5 = st.columns(3, border=True)
-            
-    with col3:
-        st.image("static/az8.jpg")
-        st.markdown("""
-        <div style="text-align:center; padding: 5px;">
-            <p style="font-size:15px; color:gray;">  
-                <b>ABDULAKEEM ABDULAZEEZ ARAMIDE</b>
-            </p>
-            <p style="font-size:15px; color:gray;">  
-                <b>(23/105/01/F/0002)</b>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col4:
-        st.image("static/ben1.jpg")
-        st.markdown("""
-        <div style="text-align:center; padding: 5px;">
-            <p style="font-size:15px; color:gray;">  
-                <b>JOSEPH BENJAMIN OLUWATEMITOPE</b>
-            </p>
-            <p style="font-size:15px; color:gray;">  
-                <b>(23/105/01/F/0143)</b>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-    with col5:
-        st.image("static/upward1.jpg")
-        st.markdown("""
-        <div style="text-align:center; padding: 5px;">
-            <p style="font-size:15px; color:gray;">  
-                <b>FADEMINE OLAKUNLE SAMUEL</b>
-            </p>
-            <p style="font-size:15px; color:gray;">  
-                <b>(23/105/01/F/0145)</b>
-            </p>
-        </div>
-        """, unsafe_allow_html=True)
-
-    st.markdown(
-        """
-        <div style="text-align:center; background-color:#f0f2f6; padding:15px; border-radius:10px; margin-top:30px;">
+            <b><p style="margin:5px 0;">ABDULAKEEM ABDULAZEEZ ARAMIDE</p>
+            <p style="margin:5px 0;">Matric No: 23/105/01/F/0002</p>
+            <p style="margin:5px 0;">Supervised by: Mr. Oladimeji Abiodun</p>
             <p style="margin:5px 0;">Department of Computer Science,</p>
             <p style="margin:5px 0;">Moshood Abiola Polytechnic, Abeokuta, Ogun State, Nigeria.</b></p>
             <p style="color:gray; font-size:12px; margin-top:10px;">Session 2024/2025</p>
