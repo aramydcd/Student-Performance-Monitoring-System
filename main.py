@@ -153,22 +153,23 @@ def auth():
                 </p>
             </div>
             """, unsafe_allow_html=True)
-            col3, col4, col5 = st.columns(3)
+            # col3, col4, col5 = st.columns(3)
             
-            col3.border = True
-            with col3:
-                st.image("static/az8.jpg")
-                st.markdown("""
-                <div style="text-align:center; padding: 5px;">
-                    <p style="font-size:15px; color:gray;">  
-                        <b>ABDULAKEEM ABDULAZEEZ ARAMIDE</b>
-                    </p>
-                    <p style="font-size:15px; color:gray;">  
-                        <b>(23/105/01/F/0002)</b>
-                    </p>
-                </div>
-                """, unsafe_allow_html=True)
-           
+            # col3.border = True
+            # with col3:
+            # st.image("static/az8.jpg", width=300)
+            st.markdown("""
+            <div style="text-align:center; padding: 5px;">
+                <!---<img src="Student-Performance-Monitoring-System/static/az8.jpg" >--->
+                <p style="font-size:15px; color:gray;">  
+                    <b>ABDULAKEEM ABDULAZEEZ ARAMIDE</b>
+                </p>
+                <p style="font-size:15px; color:gray;">  
+                    <b>(23/105/01/F/0002)</b>
+                </p>
+            </div>
+            """, unsafe_allow_html=True)
+        
          
             st.markdown("""
             <div style="text-align:center; padding: 20px;">
