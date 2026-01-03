@@ -1,27 +1,50 @@
-# Student Performance Monitoring System (Streamlit Web Application)
+# EduShield – Predictive Academic Analytics Hub 🛡️
 
-## Description
-A web based academic management system developed to help manage student records,
-attendance, exam eligibility, and GPA calculation.
+**EduShield** is a data-driven monitoring system that uses Machine Learning to predict student performance and centralize academic resources.
 
-## Features
-- Student attendance tracking
-- Exam eligibility checking
-- GPA calculation and prediction
-- Role-based login (Admin, Lecturer, Student)
+## 🚀 Technical Highlights
+- **GPA Forecasting:** Integrated Scikit-learn regression models to predict student outcomes.
+- **Data Pipeline:** Utilized Pandas for real-time transformation of SQLite data into actionable charts.
+- **Resource Management:** Robust file-upload and distribution system for academic documents.
 
-## Technologies Used
-- Streamlit
-- Python
-- SQLite
-- Vs Code
+## 🛠️ Tech Stack
+- **Dashboard Framework:** Streamlit
+- **Machine Learning:** Scikit-learn
+- **Data Science:** Pandas, NumPy, Matplotlib
+- **Backend/DB:** Python, SQLite
 
-## Usage
-Open the project in Visual Studio and run the application.
-Configure the database connection if required.
+## 📥 Quick Start
+1. **Clone & Enter:**
+   ```bash
+   git clone [https://github.com/yourusername/edushield.git](https://github.com/yourusername/edushield.git)
+   cd edushield
+
+```
+
+2. **Install Requirements:**
+```bash
+uv sync
+
+```
+
+
+3. **Launch Dashboard:**
+```bash
+streamlit run app.py
+
+```
+
+
+
+## 📈 Predictive Logic
+
+The system analyzes the correlation between attendance percentages and internal assessment scores to generate a predicted GPA. This allows faculty to identify students requiring additional support before the final examination cycle.
+
+
 
 ## Status
 Academic project developed as part of my ND Computer Science final year work.
 
 ## Author
 Abdulakeem Abdulazeez
+
